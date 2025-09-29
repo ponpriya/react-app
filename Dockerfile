@@ -10,6 +10,6 @@ RUN npm run build
 FROM nginx:alpine
 WORKDIR /etc/nginx
 ADD nginx.conf /etc/nginx/nginx.conf
-COPY --from=dist /app/dist /var/www/html
+COPY --from=build /app/dist /var/www/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
