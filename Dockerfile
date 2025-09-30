@@ -7,9 +7,10 @@ COPY . .
 RUN npm run build
 
 #Stage 1 - Serve the react app with nginx server
-FROM nginx:alpine
+
+FROM nginx:1.28.0
 WORKDIR /etc/nginx
 ADD nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/dist /var/www/html
-EXPOSE 8080
+COPY --from=0 /app/dist /usr/share/nginx/html/
+EXPOSE 5173
 CMD ["nginx", "-g", "daemon off;"]
