@@ -17,7 +17,7 @@ function App() {
         </a>
       </div>
       <div >
-       <h2>Poomaalai is open to business!</h2>
+       <h2>Poomaalai is back in business!</h2>
       </div>
       <NavBar></NavBar>
       <Course></Course>
