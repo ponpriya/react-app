@@ -1,15 +1,13 @@
 #Stage 0 - Build the react app
-FROM node:22.19.0 AS dist
+FROM node:22.19.0 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-FROM node:22.19.0 
-
-RUN npm install -g serve
+FROM nginx:alpine
 WORKDIR /app
-COPY --from=dist /app/dist ./dist
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080
-CMD ["serve", "-s", "dist", "-l", "8080"]
+CMD ["nginx", "-g", "daemon off;"]
